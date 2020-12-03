@@ -1,0 +1,18 @@
+@editorTabsBackgroundColor: #121315;
+.editor-tabs {
+    background-color: @editorTabsBackgroundColor;
+    ::v-deep .ant-tabs-card-bar .ant-tabs-tab{
+        height: 32px;
+        line-height: 32px;
+        color: #888a8e;
+        border: 1px solid @editorTabsBackgroundColor!important;
+        background: #363636;
+        margin-right: 5px;
+        user-select: none;
+    }
+    ::v-deep .ant-tabs-card-bar .ant-tabs-tab-active{
+        background: #1e1e1e;
+        border-bottom-color: #1e1e1e;
+        color: #fff ;
+    }
+}
