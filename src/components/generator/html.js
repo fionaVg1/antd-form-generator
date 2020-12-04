@@ -47,7 +47,7 @@ function buildFormTemplate(scheme, child) {
   return str;
 }
 
-// span不为24的用el-col包裹
+// span不为24的用a-col包裹
 function colWrapper(scheme, str) {
   if (someSpanIsNot24 || scheme.config.span !== 24) {
     return `<a-col :span="${scheme.config.span}">
@@ -107,6 +107,16 @@ const tags = {
     const type = el.config.type ? `type="${el.config.type}"` : '';
     const size = el.config.size ? `size="${el.config.size}"` : '';
     return `<${tag} ${type} ${size}></${tag}>`;
+  },
+  'shr-text': el => {
+    const { tag } = attrBuilder(el);
+    const size = el.config.size ? `:size="${el.config.size}"`:'';
+    const color = el.config.color ? `:color="${el.config.color}"`:'';
+    const weight = el.config.weight ? `:weight="${el.config.weight}"`:'';
+    const spacing = el.config.spacing  ? `:spacing="${el.config.spacing}"`:'';
+    const decoration = el.config.decoration ? `:decoration="${el.config.decoration}"`:'';
+    const text = el.config.text ? `:text="${el.config.text}"`:'';
+    return `<${tag} ${size} ${color} ${weight} ${spacing} ${decoration} ${text}></${tag}>`;
   },
   'el-button': el => {
     const { tag, disabled } = attrBuilder(el);

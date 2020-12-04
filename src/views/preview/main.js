@@ -30,7 +30,7 @@ function init(event) {
       links = buildLinks(code.links);
     }
 
-    $previewApp.innerHTML = `${links}<style>${code.css}</style><div>测试</div><div id="app"></div>`;
+    $previewApp.innerHTML = `${links}<style>${code.css}</style><div id="app"></div>`;
 
     if (Array.isArray(code.scripts) && code.scripts.length > 0) {
       loadScriptQueue(code.scripts, () => {
