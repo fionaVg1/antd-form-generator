@@ -1,7 +1,11 @@
 import Vue from 'vue';
 import { loadScriptQueue } from '@/utils/loadScript';
 import axios from 'axios';
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+
 Vue.prototype.$axios = axios;
+Vue.use(Antd);
 
 const $previewApp = document.getElementById('previewApp');
 const childAttrs = {
@@ -44,7 +48,8 @@ function init(event) {
 
 function newVue(attrs, main, html) {
   main = eval(`(${main})`);
-  main.template = `<div>${html}</div>`;
+  main.template = `<div>${html}</div>`; 
+  main.components = lazyImportComponent(html);
   new Vue({
     components: {
       child: main
@@ -56,4 +61,15 @@ function newVue(attrs, main, html) {
     },
     template: `<div><child ${attrs}/></div>`
   }).$mount('#app');
+}
+
+function lazyImportComponent(html){
+  let components = {};
+  if(html){
+    if(html.indexOf('shr-text')){
+      const shrText = () => import('@/components/common/Text/index');
+      components['shrText'] = shrText;
+    }
+  }
+  return components;
 }

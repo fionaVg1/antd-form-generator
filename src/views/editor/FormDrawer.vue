@@ -106,13 +106,14 @@ export default {
     };
   },
   computed: {
-    ...mapState('editor', ['isDrawerVisible', 'dragCardList']),
+    ...mapState('editor', ['isDrawerVisible', 'dragCardList', 'formConfig']),
     resources() {
       return this.scripts.concat(this.links);
     },
     formData() {
       let obj = Object.create(null);
       obj['fields'] = this.dragCardList;
+      Object.assign(obj, this.formConfig);
       return obj;
     }
   },

@@ -36,7 +36,7 @@ function buildFormTemplate(scheme, child) {
     labelPosition = `label-position="${scheme.labelPosition}"`;
   }
   const disabled = scheme.disabled ? `:disabled="${scheme.disabled}"` : '';
-  let str = `<a-form ref="${scheme.formRef}" :model="${scheme.formModel}" :rules="${scheme.formRules}" size="${scheme.size}" ${disabled} label-width="${scheme.labelWidth}px" ${labelPosition}>
+  let str = `<a-form :form="form" :model="${scheme.formModel}" :rules="${scheme.formRules}" size="${scheme.size}" ${disabled} label-width="${scheme.labelWidth}px" ${labelPosition}>
       ${child}      
     </a-form>`;
   if (someSpanIsNot24) {

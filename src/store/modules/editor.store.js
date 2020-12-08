@@ -21,6 +21,14 @@ export default {
     isDrawerVisible: false,
     formConfig: null
   },
+  getters: {
+    formConfig: state => {
+      if(!state.formConfig){
+        return formConfig;
+      }
+      return state.formConfig;
+    }
+  },
   mutations: {
     // 点击添加 统一走这里，更新id在拖入之前拼装。
     addComponent(state, payload) {

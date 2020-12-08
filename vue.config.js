@@ -1,4 +1,5 @@
 const path = require('path');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const minify = process.env.NODE_ENV === 'development' ? false : {
   collapseWhitespace: true,
@@ -29,5 +30,17 @@ module.exports = {
     },
     chainWebpack: config => {
         config.resolve.symlinks(true);
+    },
+    configureWebpack: {
+        resolve: {
+            alias: {
+                vue$: "vue/dist/vue.esm.js"
+            }
+        },
+        plugins: [
+          new MonacoWebpackPlugin({            
+            languages: ['javascript', 'css', 'html', 'typescript', 'json']
+          })
+        ]
     }
 }
