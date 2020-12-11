@@ -1,6 +1,3 @@
-/* eslint-disable max-len */
-import ruleTrigger from './ruleTrigger';
-
 let confGlobal;
 let someSpanIsNot24;
 
@@ -31,12 +28,7 @@ export function cssStyle(cssStr) {
 }
 
 function buildFormTemplate(scheme, child) {
-  let labelPosition = '';
-  if (scheme.labelPosition !== 'right') {
-    labelPosition = `label-position="${scheme.labelPosition}"`;
-  }
-  const disabled = scheme.disabled ? `:disabled="${scheme.disabled}"` : '';
-  let str = `<a-form :form="form" :model="${scheme.formModel}" :rules="${scheme.formRules}" size="${scheme.size}" ${disabled} label-width="${scheme.labelWidth}px" ${labelPosition}>
+  let str = `<a-form :form="form" :hideRequiredMark="${scheme.hideRequiredMark}" labelAlign="${scheme.labelAlign}" layout="${scheme.layout}">
       ${child}      
     </a-form>`;
   if (someSpanIsNot24) {
@@ -60,19 +52,8 @@ function colWrapper(scheme, str) {
 const layouts = {
   colFormItem(scheme) {
     const config = scheme.config;
-    let labelWidth = '';
-    let label = `label="${config.label}"`;
-    if (config.labelWidth && config.labelWidth !== confGlobal.labelWidth) {
-      labelWidth = `label-width="${config.labelWidth}px"`;
-    }
-    if (config.showLabel === false) {
-      labelWidth = 'label-width="0"';
-      label = '';
-    }
-    const required =
-      !ruleTrigger[config.tag] && config.required ? 'required' : '';
     const tagDom = tags[config.tag] ? tags[config.tag](scheme) : null;
-    let str = `<a-form-item ${labelWidth} ${label} prop="${scheme.__vModel__}" ${required}>
+    let str = `<a-form-item :required="${config.required}">
         ${tagDom}
       </a-form-item>`;
     str = colWrapper(scheme, str);
@@ -110,12 +91,12 @@ const tags = {
   },
   'shr-text': el => {
     const { tag } = attrBuilder(el);
-    const size = el.config.size ? `:size="${el.config.size}"`:'';
-    const color = el.config.color ? `:color="${el.config.color}"`:'';
-    const weight = el.config.weight ? `:weight="${el.config.weight}"`:'';
-    const spacing = el.config.spacing  ? `:spacing="${el.config.spacing}"`:'';
-    const decoration = el.config.decoration ? `:decoration="${el.config.decoration}"`:'';
-    const text = el.config.text ? `:text="${el.config.text}"`:'';
+    const size = el.config.size ? `size="${el.config.size}"`:'';
+    const color = el.config.color ? `color="${el.config.color}"`:'';
+    const weight = el.config.weight ? `weight="${el.config.weight}"`:'';
+    const spacing = el.config.spacing  ? `spacing="${el.config.spacing}"`:'';
+    const decoration = el.config.decoration ? `decoration="${el.config.decoration}"`:'';
+    const text = el.config.text ? `text="${el.config.text}"`:'';
     return `<${tag} ${size} ${color} ${weight} ${spacing} ${decoration} ${text}></${tag}>`;
   },
   'el-button': el => {

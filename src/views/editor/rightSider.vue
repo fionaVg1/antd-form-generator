@@ -16,7 +16,7 @@
       </a-tab-pane>
       <a-tab-pane key="3" tab="数据源">
         <a-layout>
-          <DataSourse />
+          <DataSource />
         </a-layout>
       </a-tab-pane>
     </a-tabs>
@@ -26,13 +26,20 @@
 <script>
 import Attribute from './attribute';
 import FormAttribute from './FormAttribute';
-import DataSourse from './dataSource';
+import DataSource from './dataSource';
+import { mapActions } from 'vuex';
 
 export default {
   components: {
     Attribute,
     FormAttribute,
-    DataSourse
+    DataSource
+  },
+  created() {
+    this.INIT_FORM_ATTRIBUTE();
+  },
+  methods: {
+    ...mapActions('editor', ['INIT_FORM_ATTRIBUTE'])
   }
 };
 </script>

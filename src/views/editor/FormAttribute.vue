@@ -1,12 +1,12 @@
 <template>
   <a-form class="formAttribute" :form="form" v-bind="formItemLayout">
-    <a-form-item label="表单名">
-      <a-input v-model="formConfig.name" />
+    <a-form-item label="隐藏必选">
+      <a-switch v-model="formConfig.hideRequiredMark" />
     </a-form-item>
     <a-form-item label="标签对齐">
       <a-radio-group
-        :default-value="formConfig.labelPosition"
-        v-model="formConfig.labelPosition"
+        :default-value="formConfig.labelAlign"
+        v-model="formConfig.labelAlign"
         size="small"
       >
         <a-radio-button value="left">
@@ -14,16 +14,30 @@
         </a-radio-button>
         <a-radio-button value="right">
           右对齐
+        </a-radio-button>       
+      </a-radio-group>
+    </a-form-item>
+    <a-form-item label="表单布局">
+      <a-radio-group
+        :default-value="formConfig.layout"
+        v-model="formConfig.layout"
+        size="small"
+      >
+        <a-radio-button value="horizontal">
+          水平
         </a-radio-button>
-        <a-radio-button value="top">
-          顶部对齐
-        </a-radio-button>
+        <a-radio-button value="vertical">
+          垂直
+        </a-radio-button> 
+         <a-radio-button value="inline">
+          行内
+        </a-radio-button>     
       </a-radio-group>
     </a-form-item>
   </a-form>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -35,15 +49,9 @@ export default {
   },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'formAttribute' });
-  },
-  created() {
-    this.INIT_FORM_ATTRIBUTE();
-  },
+  }, 
   computed: {
     ...mapState('editor', ['formConfig'])
-  },
-  methods: {
-    ...mapActions('editor', ['INIT_FORM_ATTRIBUTE'])
-  }
+  }, 
 };
 </script>

@@ -310,6 +310,7 @@ function buildexport(
   watch: {},
   created () {
     ${created}
+    this.form = this.$form.createForm(this, { name: 'formPreview' });
   },
   mounted () {},
   methods: {

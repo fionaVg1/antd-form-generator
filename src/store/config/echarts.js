@@ -255,11 +255,12 @@ export const commonComponents = [
     config: {
       span: 12,
       size: 18,
-      color: 'none',
+      color: 'red',
       weight: false,
       spacing: 'normal',
       decoration: 'none',
-      tag: 'shr-text'
+      tag: 'shr-text',
+      required: 'false'
     },
     type: 'shr-text'
   },

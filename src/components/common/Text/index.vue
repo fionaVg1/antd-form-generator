@@ -35,7 +35,7 @@ export default {
     textStyle() {
       return {
         'font-size': `${this.size}px`,
-        color: this.color,
+        'color': this.color,
         'font-weight': this.weight ? 'bold' : 'normal',
         'letter-spacing': `${this.spacing}px`,
         'text-decoration': this.decoration

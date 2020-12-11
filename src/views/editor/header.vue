@@ -87,7 +87,7 @@ export default {
 #shr-editor .logo {
   width: 200px;
   height: 60px;
-  background: url(../../assets/logo.gif) no-repeat center;
+  // background: url(../../assets/logo.png) no-repeat center;
   margin: 2px 28px 2px 0;
 }
 .nav-bar {
