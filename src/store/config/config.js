@@ -205,6 +205,30 @@ export const chartsComponents = [
     align: 'top'
   }
 ];
+export const inputComponents = [
+  {
+    layout:'colFormItem',
+    name:'单行文本',    
+    icon: 'icon-input',    
+    config:{
+      span: 12,
+      tag:'a-input' ,
+      showLabel:true,
+      label:'单行文本'
+    }
+  },
+  {
+    layout: 'colFormItem',
+    name: '多行文本',
+    icon: 'icon-textarea',
+    config: {
+      span: 24,
+      tag:'a-textarea',
+      showLabel:true,
+      label:'多行文本'
+    }
+  }
+];
 
 export const commonComponents = [
   {

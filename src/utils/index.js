@@ -1,4 +1,4 @@
-import { chartsComponents, commonComponents } from '../store/config/echarts';
+import { chartsComponents, commonComponents } from '../store/config/config';
 // 深拷贝对象
 export function deepClone(obj) {
   const _toString = Object.prototype.toString;

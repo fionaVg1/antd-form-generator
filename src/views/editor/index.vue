@@ -11,10 +11,10 @@
 </template>
 <script>
 import '../../css/editor/editor.less';
-import Header from './header';
-import LeftSider from './leftSider';
-import RightSider from './rightSider';
-import Page from './page';
+import Header from './Header';
+import LeftSider from './LeftSider';
+import RightSider from './RightSider';
+import Page from './Page';
 import FormDrawer from './FormDrawer';
 
 export default {

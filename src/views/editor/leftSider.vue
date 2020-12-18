@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import Container from './container';
-import Widget from './widget';
-import Preset from './preset';
+import Container from './Container';
+import Widget from './Widget';
+import Preset from './Preset';
 
 export default {
   components: {

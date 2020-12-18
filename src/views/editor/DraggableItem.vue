@@ -37,6 +37,10 @@ const layouts = {
     const { activeItem } = this.$listeners;
     const config = currentItem.config;
     const className = 'drag-col-item active-drag-item drag-item';
+    let labelWidth = config.labelWidth ? `${config.labelWidth}px` : null;
+    if (config.showLabel === false) {
+      labelWidth = '0';
+    }
     return (
       <a-col
         span={config.span}
@@ -47,9 +51,9 @@ const layouts = {
         }}
       >
         {components.itemBtns.apply(this, arguments)}
-        <div class="child-component-wrap">
+        <a-form-item label-width={labelWidth} label={config.showLabel ? config.label : ''} required={config.required}>
           <render conf={currentItem} />
-        </div>
+        </a-form-item>
       </a-col>
     );
   },

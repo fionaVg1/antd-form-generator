@@ -48,12 +48,36 @@
         </div>
       </draggable>
     </div>
+    <a-divider orientation="left">
+      输入型组件
+    </a-divider>
+    <div class="input-wrap">
+      <draggable
+        v-model="inputComponentsList"
+        v-bind="dragOptions"
+        class="components-draggable"
+        :clone="cloneComponent"
+        @end="onEnd"
+      >
+        <div
+          class="charts-item"
+          v-for="(item, index) in inputComponentsList"
+          :key="`input_${index}`"
+          @click="addComponent(item)"
+        >
+          <span :class="`tool-icon iconfont ${item.icon}`"></span>
+          <span>
+            {{ item.name }}
+          </span>
+        </div>
+      </draggable>
+    </div>
   </div>
 </template>
 
 <script>
 import draggable from 'vuedraggable';
-import { chartsComponents, commonComponents } from '@/store/config/echarts';
+import { chartsComponents, commonComponents, inputComponents } from '@/store/config/config';
 import mixin from './Mixin';
 export default {
   components: { draggable },
@@ -61,7 +85,8 @@ export default {
   data() {
     return {
       chartsList: chartsComponents,
-      commonComponentsList: commonComponents
+      commonComponentsList: commonComponents,
+      inputComponentsList: inputComponents
     };
   }
 };
@@ -70,7 +95,8 @@ export default {
 <style lang="less" scoped>
 .widget-wrap {
   .charts-wrap,
-  .common-wrap {
+  .common-wrap,
+  .input-wrap {
     padding: 0 10px;
     .components-draggable {
       display: flex;

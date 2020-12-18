@@ -6,6 +6,7 @@
       tag="div"
       class="components-draggable"
       :clone="cloneComponent"
+      draggable=".container-item"
       @end="onEnd"
     >
       <div

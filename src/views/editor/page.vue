@@ -9,27 +9,29 @@
         margin: 0
       }"
     >
-      <draggable
-        v-model="dragCardList"
-        v-bind="dragOptions"
-        @start="isDragging = true"
-        @end="isDragging = false"
-        tag="div"
-        class="drag-content"
-        :move="onMove"
-      >
-        <draggable-item
-          v-for="(item, index) in dragCardList"
-          :key="item.renderKey"
-          :drawing-list="dragCardList"
-          :current-item="item"
-          :index="index"
-          :active-id="index"
-          @activeItem="activeFormItem"
-          @copyItem="copyCard"
-          @deleteItem="deleteCard"
-        />
-      </draggable>
+      <a-form :form="pageForm" :label-col="{ span: 5}" :wrapper-col="{span:12}" @submit="handleSubmit">
+        <draggable
+          v-model="dragCardList"
+          v-bind="dragOptions"
+          @start="isDragging = true"
+          @end="isDragging = false"
+          tag="div"
+          class="drag-content"
+          :move="onMove"
+        >
+          <draggable-item
+            v-for="(item, index) in dragCardList"
+            :key="item.renderKey"
+            :drawing-list="dragCardList"
+            :current-item="item"
+            :index="index"
+            :active-id="index"
+            @activeItem="activeFormItem"
+            @copyItem="copyCard"
+            @deleteItem="deleteCard"
+          />
+        </draggable>
+      </a-form>
     </a-layout-content>
   </a-layout>
 </template>
@@ -50,7 +52,8 @@ export default {
   data() {
     return {
       isDragging: false,
-      editable: true
+      editable: true,
+      pageForm: this.$form.createForm(this,{name:'coordinated'})
     };
   },
   computed: {
@@ -98,6 +101,9 @@ export default {
     },
     activeFormItem(currentItem) {
       this.ACTIVE_FORM_ITEM(currentItem);
+    },
+    handleSubmit(e) {
+       e.preventDefault();
     }
   },
   mounted() {
@@ -110,6 +116,7 @@ export default {
 .drag-content {
   position: relative;
   height: 100%;
+  min-height:100px;
   .drag-item {
     &:hover {
       & > .toolbar {

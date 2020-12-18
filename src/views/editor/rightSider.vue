@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import Attribute from './attribute';
+import Attribute from './Attribute';
 import FormAttribute from './FormAttribute';
-import DataSource from './dataSource';
+import DataSource from './DataSource';
 import { mapActions } from 'vuex';
 
 export default {
