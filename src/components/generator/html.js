@@ -112,7 +112,7 @@ const tags = {
     if (child) child = `\n${child}\n`; // 换行
     return `<${tag} ${type} ${icon} ${round} ${size} ${plain} ${disabled} ${circle}>${child}</${tag}>`;
   },
-  'el-input': el => {
+  'a-input': el => {
     const {
       tag,
       disabled,

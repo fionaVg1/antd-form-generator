@@ -17,6 +17,7 @@
     "moment": "^2.29.0",
     "monaco-editor": "^0.21.2",
     "monaco-editor-webpack-plugin": "^2.0.0",
+    "throttle-debounce": "^3.0.1",
     "uuid": "^8.3.0",
     "vue": "^2.6.11",
     "vue-echarts": "^5.0.0-beta.0",

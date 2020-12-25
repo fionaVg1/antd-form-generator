@@ -11,6 +11,7 @@ import {
   UPDATE_GLOBAL_ID
 } from '../action-types';
 import { formConfig } from '../config/component';
+import { clearDragCardList } from "@/utils/db";
 export default {
   state: {
     dragCardList: [],
@@ -71,6 +72,7 @@ export default {
     emptyPanel(state) {
       state.globalCount = 0;
       state.dragCardList = [];
+      clearDragCardList();
     },
     //卡片预览
     previewForm(state, payload) {

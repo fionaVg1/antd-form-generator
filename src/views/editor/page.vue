@@ -1,7 +1,5 @@
 <template>
-  <a-layout
-    style="border-left: 1px solid #e8e8e8;border-right: 1px solid #e8e8e8;background: #fff"
-  >
+  <a-layout style="border-left: 1px solid #e8e8e8;border-right: 1px solid #e8e8e8;background: #fff">
     <a-layout-content
       :style="{
         background: '#fff',
@@ -9,7 +7,12 @@
         margin: 0
       }"
     >
-      <a-form :form="pageForm" :label-col="{ span: 5}" :wrapper-col="{span:12}" @submit="handleSubmit">
+      <a-form
+        :form="pageForm"
+        :label-col="{ span: 5}"
+        :wrapper-col="{span:12}"
+        @submit="handleSubmit"
+      >
         <draggable
           v-model="dragCardList"
           v-bind="dragOptions"
@@ -37,51 +40,63 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable';
-import DraggableItem from './DraggableItem';
-import { mapActions } from 'vuex';
-import 'echarts/lib/chart/line';
-import 'echarts/lib/chart/bar';
-import 'echarts/lib/chart/pie';
-import 'echarts/lib/chart/scatter';
+import draggable from "vuedraggable";
+import DraggableItem from "./DraggableItem";
+import { mapActions } from "vuex";
+import { debounce } from "throttle-debounce";
+import { getDragCardList, saveDragCardList } from "@/utils/db";
+import "echarts/lib/chart/line";
+import "echarts/lib/chart/bar";
+import "echarts/lib/chart/pie";
+import "echarts/lib/chart/scatter";
 import 'echarts/lib/chart/radar';
-import 'echarts/lib/component/legend';
-import 'echarts/lib/component/title';
+import "echarts/lib/component/legend";
+import "echarts/lib/component/title";
+const dragCardListInDB = getDragCardList();
 export default {
   components: { draggable, DraggableItem },
   data() {
     return {
       isDragging: false,
       editable: true,
-      pageForm: this.$form.createForm(this,{name:'coordinated'})
+      pageForm: this.$form.createForm(this, { name: "coordinated" }),
     };
+  },
+  watch: {
+    dragCardList:{
+      handler(val) {
+        let saveDragCardListDebounce = debounce(340, saveDragCardList);
+        saveDragCardListDebounce(val);
+      },
+      deep: true,
+    },
   },
   computed: {
     dragCardList: {
       get() {
-        console.log('dragCardList:', this.$store.state.editor.dragCardList);
+        console.log("dragCardList:", this.$store.state.editor.dragCardList);
         return this.$store.state.editor.dragCardList;
       },
       set(value) {
         this.CHANGE_POSITION(value);
-      }
+      },
     },
     // eslint-disable-next-line vue/no-dupe-keys
     dragOptions() {
       return {
         animation: 340,
-        group: 'componentsGroup',
+        group: "componentsGroup",
         disabled: !this.editable,
-        ghostClass: 'ghost'
+        ghostClass: "ghost",
       };
-    }
+    },
   },
   methods: {
-    ...mapActions('editor', [
-      'CHANGE_POSITION',
-      'DELETE_DRAG_CARD',
-      'COPY_DRAG_CARD',
-      'ACTIVE_FORM_ITEM'
+    ...mapActions("editor", [
+      "CHANGE_POSITION",
+      "DELETE_DRAG_CARD",
+      "COPY_DRAG_CARD",
+      "ACTIVE_FORM_ITEM",
     ]),
     onMove({ relatedContext, draggedContext }) {
       const relatedElement = relatedContext.element;
@@ -103,12 +118,15 @@ export default {
       this.ACTIVE_FORM_ITEM(currentItem);
     },
     handleSubmit(e) {
-       e.preventDefault();
-    }
+      e.preventDefault();
+    },
   },
   mounted() {
+    if (Array.isArray(dragCardListInDB) && dragCardListInDB.length > 0){
+      this.dragCardList = dragCardListInDB;
+    }
     this.activeFormItem(this.dragCardList[0]);
-  }
+  },
 };
 </script>
 
@@ -116,7 +134,7 @@ export default {
 .drag-content {
   position: relative;
   height: 100%;
-  min-height:100px;
+  min-height: 100px;
   .drag-item {
     &:hover {
       & > .toolbar {
@@ -178,7 +196,7 @@ export default {
   display: block;
   overflow: hidden;
   &::before {
-    content: ' ';
+    content: " ";
     position: absolute;
     left: 0;
     right: 0;
